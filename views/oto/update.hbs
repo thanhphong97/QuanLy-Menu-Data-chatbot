@@ -1,0 +1,25 @@
+<div class="row-fluid">
+    <h3>Cập nhật đữ liệu ngành công nghệ kỹ thuật oto</h3>
+</div>
+<div class="update">
+    <form action="/oto/update" method="post">
+            <div class="control-group">
+                <label class="control-label" for="title">title</label>
+                <input class="form-control" type="text" id="title" name="title" value="{{items.title}}">
+            </div>
+            <div>
+                <label for="intent">intent</label>
+                <input type="text" id="intent" name="intent" value="{{items.intent}}">
+            </div>
+            <div>
+                <label for="url">url</label>
+                <input type="text" id="url" name="url" value="{{items.url}}">
+            </div>
+        <div>
+            <input type="hidden" value="{{items._id}}" id="id" name="id">
+        </div>
+        <div>
+            <button class="btn-success" type="submit">Update</button>
+        </div>
+    </form>
+</div>
