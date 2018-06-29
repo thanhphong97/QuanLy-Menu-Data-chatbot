@@ -42,18 +42,18 @@ router.post('/cntt/insert',function(req,res,next){
             db.close();
         });
     });
-    res.redirect('/');
+    res.redirect('/cntt');
 });
 router.get('/cntt/insert',function(req,res,next){
     res.render('./cntt/insert',{layout: './layout_admin'});
 });
 router.get('/cntt/update/:id',function (req,res,next) {
-    var intent = req.params.id;
+    var id = req.params.id;
     var resultArray = [];
     mongo.connect(url, function(err, db) {
         assert.equal(null, err);
         var dbo = db.db("dbChatBot_Demo2");
-        dbo.collection('cong_nghe_thong_tin').findOne({'intent': intent},function (err,result){
+        dbo.collection('cong_nghe_thong_tin').findOne({'_id': objectId(id)},function (err,result){
             if(err) throw  err;
             console.log(result.url);
             resultArray = result;
@@ -83,12 +83,18 @@ router.post('/cntt/update',function(req,res,next){
     res.redirect('/cntt');
 });
 
-router.get('/cntt/delete',function(req,res,next){
-
-});
-
-router.post('/cntt/delete',function(req,res,next){
-
+router.get('/cntt/delete/:id',function(req,res,next){
+    var id = req.params.id;
+    mongo.connect(url, function(err, db) {
+        assert.equal(null, err);
+        var dbo = db.db('dbChatBot_Demo2');
+        dbo.collection('cong_nghe_thong_tin').deleteOne({"_id": objectId(id)}, function(err, result) {
+            assert.equal(null, err);
+            console.log('Item deleted');
+            db.close();
+        });
+    });
+    res.redirect('/cntt');
 });
 
 //oto
@@ -136,23 +142,23 @@ router.post('/oto/insert',function(req,res,next){
         });
     });
 
-    res.redirect('/');
+    res.redirect('/oto');
 
 });
+
 router.get('/oto/insert',function(req,res,next){
     res.render('./oto/insert', {layout: './layout_admin'})
-});
-router.post('/oto/update',function(req,res,next){
-
 });
 
 router.get('/oto/update/:id',function (req,res,next) {
     var intent = req.params.id;
     var resultArray = [];
+    var id = req.params.id;
+
     mongo.connect(url, function(err, db) {
         assert.equal(null, err);
         var dbo = db.db("dbChatBot_Demo2");
-        dbo.collection('cong_nghe_ky_thuat_oto').findOne({'intent': intent},function (err,result){
+        dbo.collection('cong_nghe_ky_thuat_oto').findOne({'_id': objectId(id)},function (err,result){
             if(err) throw  err;
             console.log(result.url);
             resultArray = result;
@@ -162,6 +168,7 @@ router.get('/oto/update/:id',function (req,res,next) {
         });
     });
 });
+
 router.post('/oto/update',function(req,res,next){
     var item = {
         title: req.body.title,
@@ -179,10 +186,20 @@ router.post('/oto/update',function(req,res,next){
             db.close();
         });
     });
-    res.redirect('/');
+    res.redirect('/oto');
 });
 
-router.post('/oto/delete',function(req,res,next){
-
+router.get('/oto/delete/:id',function(req,res,next){
+    var id = req.params.id;
+    mongo.connect(url, function(err, db) {
+        assert.equal(null, err);
+        var dbo = db.db('dbChatBot_Demo2');
+        dbo.collection('cong_nghe_ky_thuat_oto').deleteOne({"_id": objectId(id)}, function(err, result) {
+            assert.equal(null, err);
+            console.log('Item deleted');
+            db.close();
+        });
+    });
+    res.redirect('/oto');
 });
 module.exports = router;

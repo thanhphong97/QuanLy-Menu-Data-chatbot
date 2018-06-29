@@ -9,17 +9,32 @@
             <th>url</th>
             <th></th>
         </tr>
-            {{#each items}}
+        {{#each items}}
             <tr>
                 <td>{{this.title}}</td>
                 <td>{{this.intent}}</td>
                 <td>{{this.url}}</td>
                 <td>
-                    <a href="/oto/delete" class="btn btn-default">Xóa</a>
-                    <a href="/oto/update" class="btn btn-default">Sửa</a>
+                    <button id="btnXoa" onclick="document.getElementById('myModal').style.display = 'block'; " class="btn btn-default">Xóa</button>
+                    <a href="/oto/update/{{this._id}}" class="btn btn-default">Sửa</a>
+                    <input id="_id" type="hidden" value="{{this._id}}">
                 </td>
             </tr>
-            {{/each}}
+
+        {{/each}}
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" onclick="document.getElementById('myModal').style.display = 'block'; ">&times;</span>
+                <h2>Xóa dòng dữ liệu này</h2>
+                <button class="btn btn-danger" id="btnDongY" onclick="var id = document.getElementById('_id').value; window.location.href = '/oto/delete/'+id;">Đồng ý</button>
+                <a href=""></a>
+                <button class="btn btn-inverse" onclick="document.getElementById('myModal').style.display = 'none'">Hủy bỏ</button>
+            </div>
+
+        </div>
 
     </table>
 </div>
+
