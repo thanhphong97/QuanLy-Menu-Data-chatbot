@@ -22,19 +22,17 @@
             </tr>
 
         {{/each}}
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close" onclick="document.getElementById('myModal').style.display = 'block'; ">&times;</span>
-                <h2>Xóa dòng dữ liệu này</h2>
-                <button class="btn btn-danger" id="btnDongY" onclick="var id = document.getElementById('_id').value; window.location.href = '/oto/delete/'+id;">Đồng ý</button>
-                <a href=""></a>
-                <button class="btn btn-inverse" onclick="document.getElementById('myModal').style.display = 'none'">Hủy bỏ</button>
-            </div>
-
-        </div>
-
     </table>
 </div>
+<div id="myModal" class="modal">
 
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" onclick="document.getElementById('myModal').style.display = 'block'; ">&times;</span>
+        <h2>Xóa dòng dữ liệu này</h2>
+        <button class="btn btn-danger" id="btnDongY" onclick="var id = document.getElementById('_id').value; window.location.href = '/oto/delete/'+id;">Đồng ý</button>
+        <a href=""></a>
+        <button class="btn btn-inverse" onclick="document.getElementById('myModal').style.display = 'none'">Hủy bỏ</button>
+    </div>
+
+</div>

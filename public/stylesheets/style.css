@@ -380,9 +380,9 @@ a.brand span {
 /* Navigation Section
 =================================================================== */
 
-/*#sidebar-left {*/
-	/*background: #3A3A3A;*/
-/*}*/
+#sidebar-left {
+	background: #3A3A3A;
+}
 
 .sidebar-nav > ul{
 	margin: 0px;
@@ -1512,8 +1512,8 @@ ul.chat.metro li.right .message .arrow {
   vertical-align: middle;
   cursor: pointer;
   border: 1px solid #a7a9aa;
-  -webkit-border-radius: 0px !important;
-  border-radius: 0px !important;
+  -webkit-border-radius: 5px ;
+  border-radius: 6px ;
 }
 
 .btn i {
@@ -1521,8 +1521,6 @@ ul.chat.metro li.right .message .arrow {
 }
 
 .btn:focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
 

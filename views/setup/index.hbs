@@ -1,18 +1,19 @@
+<section id="report">
+   {{#if stt}}
+       <h2>{{report}}</h2>
+   {{/if}}
+</section>
 <form action="/setup/update" method="post">
-    <section >
         <div style="color: #f5e309; font-weight:bold ">menu lồng</div>
-        <div>
+        <div class="">
             {{#each item1}}
                 <label for="title_Menu">title</label>
                 <input type="text" id="title_Menu" name="title_Menu" value="{{this.title}}">
             {{/each}}
         </div>
-    </section >
-    <hr>
-    <section >
         <div>
-            <div style="color: #f5e309; font-weight:bold ">menu item</div>
-            <table border="1">
+            <div class="table-responsive" style="color: #f5e309; font-weight:bold ">menu item</div>
+            <table border="1" class="table">
                 {{#each item1_child}}
                     <tr>
                         <td>Menu Item {{@index}}</td>
@@ -28,9 +29,7 @@
                 {{/each}}
             </table>
         </div>
-    </section >
     <hr>
-    <section >
         <div>
             <div style="color: #f5e309; font-weight:bold ">menu lồng</div>
             {{#each item2}}
@@ -40,6 +39,5 @@
                 <input type="text" id="url_ButtonURL" name="url_ButtonURL" value="{{this.url}}">
             {{/each}}
         </div>
-    </section>
     <button type="submit" class="btn btn-success">Lưu</button>
 </form>

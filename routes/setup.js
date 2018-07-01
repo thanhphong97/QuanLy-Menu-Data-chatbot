@@ -5,11 +5,13 @@ const fs = require('fs');
 const url = "mongodb://localhost:27017/";
 /* GET home page. */
 const PAGE_ACCESS_TOKEN = 'EAAIb1JRAkFQBAKAWqIPy4SermzWV8hntp2zsjZA13v63xUZBaUd8qXoNzY9oob7Q49Hg1vTjMMFxWpsmQH2AJD9yCJ1m2xnVQRxlmHxs1HgIZAHGep1aATMZArvsivzF3AZA6iEZCurn2RIkspMKZB9yQN3ejgPc7jqXPMHgWue8QHJXWsJR7By';
+let report;
+let stt = false;
 router.get('/', function(req, res) {
+    getMenu();
     let item1 = [];
     let item2 = [];
     let item1_child = [];
-    getMenu();
     let fileName = __dirname + '/../data/data.json';
     let results = JSON.parse(fs.readFileSync(fileName, 'utf-8'));
     let items= results.data[0].persistent_menu[0].call_to_actions;
@@ -19,7 +21,7 @@ router.get('/', function(req, res) {
     for(var i in item1[0].call_to_actions){
         item1_child.push(item1[0].call_to_actions[i]);
     }
-    res.render('./setup/index',{title: 'Setup item menu',item1: item1,item1_child: item1_child, item2: item2, layout:'./layout_admin'});
+    res.render('./setup/index',{stt, report: report, title: 'Setup item menu',item1: item1,item1_child: item1_child, item2: item2, layout:'./layout_admin'});
 });
 
 
@@ -35,7 +37,7 @@ function getMenu(){
     }),function (err,res) {
         if(err) throw err;
         console.log(res);
-    }
+    };
     return true;
 }
 router.post('/update',function (req,res) {
@@ -91,9 +93,9 @@ router.post('/update',function (req,res) {
                 }
             ]
         }`;
-    console.log(payload0)
     var msg = JSON.parse(messageData);
     console.log('msg data: ' + msg);
+
     // Start the request
     request({
             url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + PAGE_ACCESS_TOKEN,
@@ -107,11 +109,12 @@ router.post('/update',function (req,res) {
                 //res.send('setup Persistent menu');
                 console.log("update Persistent menu");
             } else {
-                //res.send('Lỗi');
-                console.log('update loi' + error)
+                report = JSON.parse(body).error.message;
+                stt = true;
+                console.log('update loi' + report)
             }
         });
-    res.redirect('/');
+    res.redirect('back');
 });
 
 
