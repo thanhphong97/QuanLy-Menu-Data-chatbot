@@ -9,6 +9,7 @@ var expressSession = require('express-session');
 
 
 var indexRouter = require('./routes/index');
+var setupRouter = require('./routes/setup');
 
 var app = express();
 
@@ -24,8 +25,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
 
-
 app.use('/', indexRouter);
+app.use('/setup',setupRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

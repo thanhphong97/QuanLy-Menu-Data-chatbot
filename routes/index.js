@@ -5,11 +5,11 @@ var mongo = require('mongodb').MongoClient;
 var objectId = require('mongodb').ObjectID;
 var url = "mongodb://localhost:27017/";
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.render('index', { title: 'Quản lý DB chatbot',message: 'Admin home' ,layout: './layout_admin'});
 });
 
-router.get('/cntt',function (req,res,next){
+router.get('/cntt',function (req,res){
     //in danh sách dữ liệu lên
     var resultArray = [];
     mongo.connect(url, function(err, db) {
@@ -26,7 +26,7 @@ router.get('/cntt',function (req,res,next){
     });
 });
 
-router.post('/cntt/insert',function(req,res,next){
+router.post('/cntt/insert',function(req,res){
     var item = {
         title: req.body.title,
         intent: req.body.intent,
@@ -44,10 +44,10 @@ router.post('/cntt/insert',function(req,res,next){
     });
     res.redirect('/cntt');
 });
-router.get('/cntt/insert',function(req,res,next){
+router.get('/cntt/insert',function(req,res){
     res.render('./cntt/insert',{layout: './layout_admin'});
 });
-router.get('/cntt/update/:id',function (req,res,next) {
+router.get('/cntt/update/:id',function (req,res) {
     var id = req.params.id;
     var resultArray = [];
     mongo.connect(url, function(err, db) {
@@ -63,7 +63,7 @@ router.get('/cntt/update/:id',function (req,res,next) {
         });
     });
 });
-router.post('/cntt/update',function(req,res,next){
+router.post('/cntt/update',function(req,res){
     var item = {
         title: req.body.title,
         intent: req.body.intent,
@@ -83,7 +83,7 @@ router.post('/cntt/update',function(req,res,next){
     res.redirect('/cntt');
 });
 
-router.get('/cntt/delete/:id',function(req,res,next){
+router.get('/cntt/delete/:id',function(req,res){
     var id = req.params.id;
     mongo.connect(url, function(err, db) {
         assert.equal(null, err);
@@ -99,7 +99,7 @@ router.get('/cntt/delete/:id',function(req,res,next){
 
 //oto
 
-router.get('/oto',function (req,res,next){
+router.get('/oto',function (req,res){
     //in danh sách dữ liệu lên
     var resultArray = [];
     mongo.connect(url, function(err, db) {
@@ -116,7 +116,7 @@ router.get('/oto',function (req,res,next){
     });
 });
 
-router.post('/oto/insert',function(req,res,next){
+router.post('/oto/insert',function(req,res){
     /*req.check('title', 'title bỏ trống').isEmpty();
     req.check('intent', 'title bỏ trống').isEmpty();
     req.check('url', 'title bỏ trống').isEmpty();
@@ -146,12 +146,11 @@ router.post('/oto/insert',function(req,res,next){
 
 });
 
-router.get('/oto/insert',function(req,res,next){
+router.get('/oto/insert',function(req,res){
     res.render('./oto/insert', {layout: './layout_admin'})
 });
 
-router.get('/oto/update/:id',function (req,res,next) {
-    var intent = req.params.id;
+router.get('/oto/update/:id',function (req,res) {
     var resultArray = [];
     var id = req.params.id;
 
@@ -169,7 +168,7 @@ router.get('/oto/update/:id',function (req,res,next) {
     });
 });
 
-router.post('/oto/update',function(req,res,next){
+router.post('/oto/update',function(req,res){
     var item = {
         title: req.body.title,
         intent: req.body.intent,
@@ -189,7 +188,7 @@ router.post('/oto/update',function(req,res,next){
     res.redirect('/oto');
 });
 
-router.get('/oto/delete/:id',function(req,res,next){
+router.get('/oto/delete/:id',function(req,res){
     var id = req.params.id;
     mongo.connect(url, function(err, db) {
         assert.equal(null, err);
