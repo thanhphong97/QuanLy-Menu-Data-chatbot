@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const request = require('request');
 const fs = require('fs');
-const url = "mongodb://localhost:27017/";
+const vl = require('express-validator');
 /* GET home page. */
 const PAGE_ACCESS_TOKEN = 'EAAIb1JRAkFQBAKAWqIPy4SermzWV8hntp2zsjZA13v63xUZBaUd8qXoNzY9oob7Q49Hg1vTjMMFxWpsmQH2AJD9yCJ1m2xnVQRxlmHxs1HgIZAHGep1aATMZArvsivzF3AZA6iEZCurn2RIkspMKZB9yQN3ejgPc7jqXPMHgWue8QHJXWsJR7By';
 let report;
 let stt = false;
+
 router.get('/', function(req, res) {
     getMenu();
     let item1 = [];
@@ -50,6 +51,11 @@ router.post('/update',function (req,res) {
     let payload2 = req.body.payload2;
     let title_ButtonURL = req.body.title_ButtonURL;
     let url_ButtonURL = req.body.url_ButtonURL;
+    req.check('title_Menu','title phải ít hơn 30 ký tự').isEmpty().isLength({max: 30});
+    req.check('title0','title phải ít hơn 30 ký tự').isEmpty().isLength({max: 30});
+    req.check('title1','title phải ít hơn 30 ký tự').isEmpty().isLength({max: 30});
+    req.check('title2','title phải ít hơn 30 ký tự').isEmpty().isLength({max: 30});
+    req.check('title_ButtonURL','title phải ít hơn 30 ký tự').isEmpty().isLength({max: 30});
     let menuitem = `,{
         "title": "demo",
         "type": "postback",
@@ -107,6 +113,7 @@ router.post('/update',function (req,res) {
             if (!error && response.statusCode == 200) {
                 // Print out the response body
                 //res.send('setup Persistent menu');
+                report = null;
                 console.log("update Persistent menu");
             } else {
                 report = JSON.parse(body).error.message;

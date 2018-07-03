@@ -3,26 +3,26 @@
        <h2>{{report}}</h2>
    {{/if}}
 </section>
+<div style="color: #2e960d; font-weight:bold;font-size: 20px; ">Menu lồng ghép</div>
 <form action="/setup/update" method="post">
-        <div style="color: #f5e309; font-weight:bold ">menu lồng</div>
         <div class="">
             {{#each item1}}
-                <label for="title_Menu">title</label>
+                <label for="title_Menu"><b>Title</b></label>
                 <input type="text" id="title_Menu" name="title_Menu" value="{{this.title}}">
             {{/each}}
         </div>
         <div>
-            <div class="table-responsive" style="color: #f5e309; font-weight:bold ">menu item</div>
+            <div class="table-responsive" style="color: #2e960d; font-weight:bold;font-size: 20px; ">Menu Item</div>
             <table border="1" class="table">
                 {{#each item1_child}}
                     <tr>
-                        <td>Menu Item {{@index}}</td>
+                        <td><b>Menu Item {{@index}}</b></td>
                         <td>
-                            <label for="title{{@index}}">title</label>
+                            <label for="title{{@index}}"><b>Title</b></label>
                             <input type="text"  id="title{{@index}}" name="title{{@index}}" value="{{this.title}}">
                         </td>
                         <td>
-                            <label for="payload{{@index}}">payload</label>
+                            <label for="payload{{@index}}"><b>Payload</b></label>
                             <input type="text"  id="payload{{@index}}" name="payload{{@index}}" value="{{this.payload}}">
                         </td>
                     </tr>
@@ -31,11 +31,11 @@
         </div>
     <hr>
         <div>
-            <div style="color: #f5e309; font-weight:bold ">menu lồng</div>
+            <div style="color: #2e960d; font-weight:bold;font-size: 20px; ">Button URL</div>
             {{#each item2}}
-                <label for="title_ButtonURL">title</label>
+                <label for="title_ButtonURL"><b>Title</b></label>
                 <input type="text" id="title_ButtonURL" name="title_ButtonURL" value="{{this.title}}">
-                <label for="url_ButtonURL">title</label>
+                <label for="url_ButtonURL"><b>URL</b></label>
                 <input type="text" id="url_ButtonURL" name="url_ButtonURL" value="{{this.url}}">
             {{/each}}
         </div>
