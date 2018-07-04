@@ -1,38 +1,27 @@
+
 <div class="row-fluid">
     <a href="/{{majors}}/insert" class="btn btn-success">Thêm dữ liệu</a>
 </div>
 <div class="get">
-    <table class="table-bordered" border="1">
+    <table style="width: 100%" class="table-bordered" border="1">
         <tr>
-            <th>title</th>
-            <th>intent</th>
-            <th>url</th>
+            <th>Tiêu đề</th>
+            <th>Từ khóa của tiêu đề</th>
+            <th>Link bài viết</th>
             <th></th>
         </tr>
         {{#each items}}
             <tr>
-                <td style="width: 300px;">{{this.title}}</td>
+                <td style="width: 300px">{{this.title}}</td>
                 <td>{{this.intent}}</td>
                 <td>{{this.url}}</td>
                 <td>
-                    <button id="btnXoa" onclick="document.getElementById('myModal').style.display = 'block'; " class="btn btn-danger">Xóa</button>
+                    <button id="btnXoa" onclick="if(confirm('Bạn muốn xóa dòng dữ liệu \n {{this.title}} ?')){window.location.href='/oto/delete/{{this._id}}'}" ondblclick="document.getElementById('myModal').style.display = 'block'; " class="btn btn-danger">Xóa</button>
                     <a href="/oto/update/{{this._id}}" class="btn btn-info">Sửa</a>
-                    <input id="_id" type="hidden" value="{{this._id}}">
                 </td>
             </tr>
-
         {{/each}}
     </table>
 </div>
-<div id="myModal" class="modal">
 
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span class="close" onclick="document.getElementById('myModal').style.display = 'block'; ">&times;</span>
-        <h2>Xóa dòng dữ liệu này</h2>
-        <button class="btn btn-danger" id="btnDongY" onclick="var id = document.getElementById('_id').value; window.location.href = '/oto/delete/'+id;">Đồng ý</button>
-        <a href=""></a>
-        <button class="btn btn-inverse" onclick="document.getElementById('myModal').style.display = 'none'">Hủy bỏ</button>
-    </div>
 
-</div>

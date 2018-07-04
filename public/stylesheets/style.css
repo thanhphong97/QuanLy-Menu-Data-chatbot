@@ -1,18 +1,15 @@
-/*
-* Author: Dennis Ji
-* Template: Metro Admin Template - Bootstrap Theme
-* Version: 1.0.0
-* Bootstrap version: 2.3.1
-* Copyright 2013 Bootstrap Metro Dashboard
-* www: http://clabs.co
-* mail: lukasz@clabs.co
-* You can buy this theme on WrapBootstrap: https://wrapbootstrap.com/user/Bootstrap Metro Dashboard
-*/
-
-/* Import Section
-=================================================================== */
-										/* Forms */
-
+#table-phong{
+	width:100%;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+th, td {
+	padding: 15px;
+}
 /* Main Colors
 =================================================================== */
 

@@ -21,6 +21,7 @@ router.get('/cntt',function (req,res){
             resultArray.push(doc);
         }, function() {
             db.close();
+
             res.render('./cntt/index', {title: 'Dữ liệu ngành công công nghệ thông tin',items: resultArray, layout: './layout_admin', majors: 'cntt'});
         });
     });
@@ -84,7 +85,8 @@ router.post('/cntt/update',function(req,res){
 });
 
 router.get('/cntt/delete/:id',function(req,res){
-    var id = req.params.id;
+    let id = req.params.id;
+    console.log(id);
     mongo.connect(url, function(err, db) {
         assert.equal(null, err);
         var dbo = db.db('dbChatBot_Demo2');
