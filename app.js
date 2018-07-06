@@ -6,21 +6,26 @@ var logger = require('morgan');
 var hbs = require('express-handlebars');
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
-const handlebars = require('handlebars');
+var handlebars = require('handlebars');
 
 var indexRouter = require('./routes/index');
 var setupRouter = require('./routes/setup');
 
 var app = express();
+const validatorOption = {
 
+}
+app.use(expressValidator(validatorOption));
 // view engine setup
 app.engine('hbs', hbs({extname: 'hbs', defaultLayout:'layout_admin', layoutsDir:__dirname + '/views/layout'}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(expressValidator());
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));

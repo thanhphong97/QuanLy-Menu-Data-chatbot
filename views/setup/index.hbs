@@ -1,50 +1,62 @@
-<table style="width: 100%">
-    <caption style="color: #003399"><h1><b>Các Menu Item của Submenu {{submenu}}</b></h1></caption>
-{{#each data}}
-    <tr>
-        <th style="text-align: center; font-weight: bold; color: #9F00A7; font-size: 20px; width: 205px"  >Tên Submenu[{{@index}}] <input type="text" value="{{this.[0].title}}"></th>
-        {{#if this.[0].url}}
-            <td colspan="3"><input type="text" value="{{this.[0].url }}"></td>
-        {{else}}
-            <td colspan="3"><center><h2><b style="color: #9F00A7; font-size: 20px;">Menu Item</b></h2></center></td>
-        {{/if}}
-    </tr>
-    {{#if this.[0].call_to_actions}}
+<form action="/setup/update" method="post">
+    <table style="width: 40%; margin-left: auto; margin-right: auto;" >
+        <caption><h1><b>SubMenu</b></h1></caption>
         <tr>
-            <td></td>
-            <td><h2><b>Tên MenuItem</b></h2></td>
-            <td><h2><b>URL/Sự kiện</b></h2></td>
-            <td><h2><b>Loại (web_url/postback)</b></h2></td>
+            <th><h2><b>Tiêu đề</b></h2></th>
         </tr>
-    {{/if}}
-    {{#each this.[0].call_to_actions}}
         <tr>
-        <td></td>
-        <td ><input type="text" value="{{title}}"></td>
-        {{#if url}}
-            <td ><input type="text" value="{{url}}"></td>
-        {{else}}
-            <td><input type="text" value="{{payload}}"></td>
-        {{/if}}
-        <td>
-            <input type="text" value="{{type}}">
-        </td>
-    </tr>
-    {{/each}}
-{{/each}}
-</table>
-<br>
-<table style="width: 100%" >
-    <caption><h1><b>Button URL</b></h1></caption>
-    <tr>
-        <th><b>Tiêu đề</b></th>
-        <th><b>Link</b></th>
-    </tr>
-    <tr>
-        <td><input type="text" value="{{buttonurl.title}}"></td>
-        <td><input type="text" value="{{buttonurl.url}}"></td>
-    </tr>
-</table>
-{{#each loai}}
-    {{this}}
-{{/each}}
+            <td colspan="2"><input id="Submenu_title" name="submenu_title" type="text" value="{{submenu}}"></td>
+        </tr>
+    </table>
+    <br>
+    <table style="width: 100%">
+        <caption style="color: #003399"><h1><b>Các Menu Item của Submenu {{submenu}}</b></h1></caption>
+        {{#each data}}
+            <tr>
+                <th style="text-align: center; font-weight: bold; color: #9F00A7; font-size: 20px; width: 205px"  >Tên Submenu[{{@index}}] <input name="submenu_title_{{@index}}" id="submenu_title_{{@index}}" type="text" value="{{this.[0].title}}"></th>
+                {{#if this.[0].url}}
+                    <td colspan="3"><b>URL của submenu[{{@index}}]</b> <input id="submenu_url_{{@index}}" name="submenu_url_{{@index}}" type="text" value="{{this.[0].url }}"></td>
+                {{else}}
+                    <td colspan="3"><center><h2><b style="color: #9F00A7; font-size: 20px;">Menu Item</b></h2></center></td>
+                {{/if}}
+            </tr>
+            {{#if this.[0].call_to_actions}}
+                <tr>
+                    <td></td>
+                    <td><h2><b>Tên MenuItem</b></h2></td>
+                    <td><h2><b>URL/Sự kiện</b></h2></td>
+                    <td><h2><b>Loại (web_url/postback)</b></h2></td>
+                </tr>
+            {{/if}}
+            {{#each this.[0].call_to_actions}}
+                <tr>
+                    <td></td>
+                    <td ><input name="menuItem_{{@../index}}_title_{{@index}}" id="menuItem_{{@../index}}_title_{{@index}}" type="text" value="{{title}}"></td>
+                    {{#if url}}
+                        <td ><input name="menuItem_{{@../index}}_url_{{@index}}" id="menuItem_{{@../index}}_url_{{@index}}" type="text" value="{{url}}"></td>
+                    {{else}}
+                        <td><input name="menuItem_{{@../index}}_payload_{{@index}}" id="menuItem_{{@../index}}_payload_{{@index}}" type="text" value="{{payload}}"></td>
+                    {{/if}}
+                    <td>
+                        <input name="menuItem_{{@../index}}_type_{{@index}}" id="menuItem_{{@../index}}_type_{{@index}}" type="text" value="{{type}}">
+                    </td>
+                </tr>
+            {{/each}}
+        {{/each}}
+    </table>
+    <br>
+    <table style="width: 100%" >
+        <caption><h1><b>Button URL</b></h1></caption>
+        <tr>
+            <th><b>Tiêu đề</b></th>
+            <th><b>Link</b></th>
+        </tr>
+        <tr>
+            <td><input id="buttonURL_title" name="buttonURL_title" type="text" value="{{buttonurl.title}}"></td>
+            <td><input id="buttonURL_url" name="buttonURL_url" type="text" value="{{buttonurl.url}}"></td>
+        </tr>
+    </table>
+
+<button class="btn btn-success" type="submit">Lưu</button>
+    <a class="btn btn-danger" href="/setup/delete">Xóa Menu Tĩnh</a>
+</form>
