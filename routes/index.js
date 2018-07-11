@@ -4,6 +4,8 @@ let assert = require('assert');
 let mongo = require('mongodb').MongoClient;
 let objectId = require('mongodb').ObjectID;
 let url = "mongodb://localhost:27017/";
+const util = require('util');
+const vl = require('express-validator');
 let isLogined = false;
 /* GET home page. */
 router.get('/index', function(req, res) {
@@ -18,6 +20,13 @@ router.get('/index', function(req, res) {
 router.get('/',function (req, res) {
     res.render('./login', {layout: 'layout'})
 });
+
+router.get('/logout',function (req, res) {
+    isLogined = false;
+    req.session.isLogined = isLogined;
+    res.render('./login', {layout: 'layout'})
+});
+
 router.post('/',function (req, res) {
     let user = req.body.username;
     let pass = req.body.password;
@@ -33,7 +42,8 @@ router.post('/',function (req, res) {
             }else {
                 isLogined = true;
                 req.session.isLogined = isLogined;
-                res.render('index', { title: 'Quản lý DB chatbot',message: 'Admin home' });
+                // res.render('./cntt/index', { title: 'Quản lý DB chatbot',message: 'Admin home' });
+                res.redirect('./cntt')
             }
             db.close();
         })
@@ -61,21 +71,36 @@ router.get('/cntt',function (req,res){
 
 router.post('/cntt/insert',function(req,res){
     if(isLogined){
-        let item = {
-            title: req.body.title,
-            intent: req.body.intent,
-            url: req.body.url
-        };
-        mongo.connect(url, function(err, db) {
-            assert.equal(null, err);
-            let dbo = db.db('dbChatBot_Demo2');
-            dbo.collection('cong_nghe_thong_tin').insertOne(item, function(err, result) {
-                assert.equal(null, err);
-                console.log('Item inserted');
-                db.close();
-            });
+        req.checkBody('title','Không được để trống').notEmpty();
+        req.checkBody('intent','Không được để trống').notEmpty();
+        req.checkBody('url','Không được để trống').notEmpty();
+
+        req.getValidationResult().then(function (validationResult) {
+            if(!validationResult.isEmpty()){
+                let data = [];
+                data = util.inspect(validationResult.array());
+                res.json({
+                    result: "Thất bại",
+                    message: `${data}`
+                })
+            }else{
+                let item = {
+                    title: req.body.title,
+                    intent: req.body.intent,
+                    url: req.body.url
+                };
+                mongo.connect(url, function(err, db) {
+                    assert.equal(null, err);
+                    let dbo = db.db('dbChatBot_Demo2');
+                    dbo.collection('cong_nghe_thong_tin').insertOne(item, function(err, result) {
+                        assert.equal(null, err);
+                        console.log('Item inserted');
+                        db.close();
+                    });
+                });
+                res.redirect('/cntt');
+            }
         });
-        res.redirect('/cntt');
     }else
      res.render('./login',{layout: './layout'});
 });
@@ -88,19 +113,34 @@ router.get('/cntt/insert',function(req,res){
 });
 router.get('/cntt/update/:id',function (req,res) {
     if(isLogined){
-        let id = req.params.id;
-        let resultArray = [];
-        mongo.connect(url, function(err, db) {
-            assert.equal(null, err);
-            let dbo = db.db("dbChatBot_Demo2");
-            dbo.collection('cong_nghe_thong_tin').findOne({'_id': objectId(id)},function (err,result){
-                if(err) throw  err;
-                console.log(result.url);
-                resultArray = result;
-                db.close();
-                res.render('./cntt/update', {titles: 'Cập nhật dữ liệu ngành công công nghệ thông tin',
-                    items: resultArray, layout: './layout_admin', majors: 'cntt'});
-            });
+        req.checkBody('title','Không được để trống').notEmpty();
+        req.checkBody('intent','Không được để trống').notEmpty();
+        req.checkBody('url','Không được để trống').notEmpty();
+
+        req.getValidationResult().then(function (validationResult) {
+            if (!validationResult.isEmpty()) {
+                let data = [];
+                data = util.inspect(validationResult.array());
+                res.json({
+                    result: "Thất bại",
+                    message: `${data}`
+                })
+            }else{
+                let id = req.params.id;
+                let resultArray = [];
+                mongo.connect(url, function(err, db) {
+                    assert.equal(null, err);
+                    let dbo = db.db("dbChatBot_Demo2");
+                    dbo.collection('cong_nghe_thong_tin').findOne({'_id': objectId(id)},function (err,result){
+                        if(err) throw  err;
+                        console.log(result.url);
+                        resultArray = result;
+                        db.close();
+                        res.render('./cntt/update', {titles: 'Cập nhật dữ liệu ngành công công nghệ thông tin',
+                            items: resultArray, layout: './layout_admin', majors: 'cntt'});
+                    });
+                });
+            }
         });
     }else
      res.render('./login',{layout: './layout'})

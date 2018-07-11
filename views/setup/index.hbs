@@ -33,7 +33,7 @@
                     <td></td>
                     <td ><input name="menuItem_{{@../index}}_title_{{@index}}" id="menuItem_{{@../index}}_title_{{@index}}" type="text" value="{{title}}"></td>
                     {{#if url}}
-                        <td ><input name="menuItem_{{@../index}}_url_{{@index}}" id="menuItem_{{@../index}}_url_{{@index}}" type="text" value="{{url}}"></td>
+                        <td ><input name="menuItem_{{@../index}}_url_{{@index}}" id="menuItem_{{@../index}}_url_{{@index}}" type="text"  value="{{url}}"></td>
                     {{else}}
                         <td><input name="menuItem_{{@../index}}_payload_{{@index}}" id="menuItem_{{@../index}}_payload_{{@index}}" type="text" value="{{payload}}"></td>
                     {{/if}}
@@ -58,5 +58,4 @@
     </table>
 
 <button class="btn btn-success" type="submit">Lưu</button>
-    <a class="btn btn-danger" href="/setup/delete">Xóa Menu Tĩnh</a>
 </form>

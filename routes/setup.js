@@ -7,7 +7,7 @@ const vl = require('express-validator');
 const handlebars = require('handlebars');
 const util = require('util');
 
-const PAGE_ACCESS_TOKEN = 'EAAIb1JRAkFQBAKAWqIPy4SermzWV8hntp2zsjZA13v63xUZBaUd8qXoNzY9oob7Q49Hg1vTjMMFxWpsmQH2AJD9yCJ1m2xnVQRxlmHxs1HgIZAHGep1aATMZArvsivzF3AZA6iEZCurn2RIkspMKZB9yQN3ejgPc7jqXPMHgWue8QHJXWsJR7By';
+const PAGE_ACCESS_TOKEN = 'EAAG1Lfdo9VsBAMdjYOZAWujbwkedirSybmDjBXq1Vz1xip7oJRFrYfCM3zy3rEYZAR35cQnr0BccrZADG76H1PkRSMkdrW1EjYPLVkilGsZCTmgFKeYRaZAGjB1VAaT9Y8XJiAL7R9CX19xUGsPmPKqeoZA2AhLNZAU9paFQCiQeFBDRXW4eOYP';
 let report = '';
 let stt = false;
 router.get('/',function (req, res) {
@@ -18,63 +18,65 @@ router.get('/',function (req, res) {
             let buttonURL = [];
             let fileName = __dirname + '/../data/datav2.json';
             let results = JSON.parse(fs.readFileSync(fileName, 'utf-8'));
-            let items = results.data[0].persistent_menu[0].call_to_actions;
-            submenu.push(items[0]);
-            console.log('submenu '+ submenu[0].title +' bao gom:');
-            console.log(submenu);
-            console.log('---------------------');
 
-            buttonURL.push(items[1]);
-            console.log('button url '+buttonURL[0].title+' bao gom');
-            console.log(buttonURL);
-            console.log('--------------------');
+            try{
+                let items = results.data[0].persistent_menu[0].call_to_actions;
+                submenu.push(items[0]);
+                console.log('submenu '+ submenu[0].title +' bao gom:');
+                console.log(submenu);
+                console.log('---------------------');
 
-            let submenu_item_0 = [];
-            let submenu_item_1 = [];
-            let submenu_item_2 = [];
-            let submenu_item_3 = [];
-            let submenu_item_4 = [];
-            let data = [];
-            console.log(submenu[0].call_to_actions.length);
-            //chia nhỏ submenu ở trang menu2
-            for(let i = 0; i< submenu[0].call_to_actions.length; i++){
-                submenu_item[i] = submenu[0].call_to_actions[i];
-            }
+                buttonURL.push(items[1]);
+                console.log('button url '+buttonURL[0].title+' bao gom');
+                console.log(buttonURL);
+                console.log('--------------------');
 
-            submenu_item_0.push(submenu_item[0]);
-            for(let i in submenu_item[1].call_to_actions){
-                submenu_item_0.push(submenu_item[1].call_to_actions[i]);
-            }
-            data.push(submenu_item_0);
+                let submenu_item_0 = [];
+                let submenu_item_1 = [];
+                let submenu_item_2 = [];
+                let submenu_item_3 = [];
+                let submenu_item_4 = [];
+                let data = [];
+                console.log(submenu[0].call_to_actions.length);
+                //chia nhỏ submenu ở trang menu2
+                for(let i = 0; i< submenu[0].call_to_actions.length; i++){
+                    submenu_item[i] = submenu[0].call_to_actions[i];
+                }
 
-
-            submenu_item_1.push(submenu_item[1]);
-            for(let i in submenu_item[1].call_to_actions){
-                submenu_item_1.push(submenu_item[1].call_to_actions[i]);
-            }
-            data.push(submenu_item_1)
+                submenu_item_0.push(submenu_item[0]);
+                for(let i in submenu_item[1].call_to_actions){
+                    submenu_item_0.push(submenu_item[1].call_to_actions[i]);
+                }
+                data.push(submenu_item_0);
 
 
-            submenu_item_2.push(submenu_item[2]);
-            for(let i in submenu_item[2].call_to_actions){
-                submenu_item_2.push(submenu_item[2].call_to_actions[i]);
-            }
-            data.push(submenu_item_2)
+                submenu_item_1.push(submenu_item[1]);
+                for(let i in submenu_item[1].call_to_actions){
+                    submenu_item_1.push(submenu_item[1].call_to_actions[i]);
+                }
+                data.push(submenu_item_1)
 
 
-            submenu_item_3.push(submenu_item[3]);
-            for(let i in submenu_item[3].call_to_actions){
-                submenu_item_3.push(submenu_item[3].call_to_actions[i]);
-            }
-            data.push(submenu_item_3)
+                submenu_item_2.push(submenu_item[2]);
+                for(let i in submenu_item[2].call_to_actions){
+                    submenu_item_2.push(submenu_item[2].call_to_actions[i]);
+                }
+                data.push(submenu_item_2)
 
 
-            submenu_item_4.push(submenu_item[4]);
-            for(let i in submenu_item[4].call_to_actions){
-                submenu_item_4.push(submenu_item[4].call_to_actions[i]);
-            }
-            data.push(submenu_item_4)
-            let loai = ['postback','web_url'];
+                submenu_item_3.push(submenu_item[3]);
+                for(let i in submenu_item[3].call_to_actions){
+                    submenu_item_3.push(submenu_item[3].call_to_actions[i]);
+                }
+                data.push(submenu_item_3)
+
+
+                submenu_item_4.push(submenu_item[4]);
+                for(let i in submenu_item[4].call_to_actions){
+                    submenu_item_4.push(submenu_item[4].call_to_actions[i]);
+                }
+                data.push(submenu_item_4)
+                let loai = ['postback','web_url'];
 // console.log(submenu_item);
 //         console.log('-------------');
 //         console.log(submenu_item_0);
@@ -89,11 +91,20 @@ router.get('/',function (req, res) {
 //         console.log('-------------');
 //         console.log(data);
 
-            res.render('./setup/index',{
-                data: data,
-                buttonurl: buttonURL[0],
-                submenu: submenu[0].title
-            });
+                res.render('./setup/index',{
+                    data: data,
+                    buttonurl: buttonURL[0],
+                    submenu: submenu[0].title
+                });
+            }catch (e) {
+                res.json(
+                    {
+                        message:'Không có menu',
+                        lỗi: `${e}`
+                    }
+                )
+            }
+
         },1600);
         getMenu()
     }else {
@@ -348,6 +359,23 @@ router.post('/update',function (req,res) {
 
 });
 
+router.get('/delete',function (req,res) {
+    var dataString = {
+        "fields":[
+            "persistent_menu"
+        ]
+    };
+    request({
+        url:'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=' + PAGE_ACCESS_TOKEN,
+        method: 'DELETE',
+        header: {'Content-Type': 'application/json'},
+        form: dataString
+    }, function (err, res, body) {
+        if (err)
+            throw err;
+        console.log(body);
+    });
+})
 
 function  saveFile(obj,fileName) {
     fs.openSync(fileName,'w');

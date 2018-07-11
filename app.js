@@ -12,6 +12,7 @@ var indexRouter = require('./routes/index');
 var setupRouter = require('./routes/setup');
 
 var app = express();
+//nơi viết hàm customsValidation
 const validatorOption = {
 
 }
